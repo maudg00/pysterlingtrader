@@ -132,3 +132,9 @@ class ConnectorSterling:
     def orders_count(self):
         """Get total number of open orders"""
         return self.conn.GetOrders()
+    
+    def get_last_price(self, symbol:str):
+        """Get last symbol price"""
+        last_price=None #For unit testing purposes
+        last_price=self.conn.GetLastPrice(symbol)
+        return last_price
