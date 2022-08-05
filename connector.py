@@ -9,11 +9,30 @@
 
 import datetime, clr, sys, os
 
+
 sys.path.append(os.path.dirname(__file__))
 clr.AddReference('SterlingWrapper')
-from SterlingWrapper import Connector
-
-
+from SterlingWrapper import Connector, SymbolData
+#Symbol Data API funcionality.
+class ConnectorSymbolData:
+    symbol=""
+    market=""
+    account=""
+    conn=None
+    def __init__(self, symbol, market="", account=""):
+        self.symbol=symbol
+        self.market=market
+        self.account=account
+        self.conn=SymbolData(self.symbol, self.market, self.account)
+    
+    def get_last_price(self):
+        return self.conn.GetLastPrice()
+    
+    def get_ask_price(self):
+        return self.conn.GetAskPrice()
+    
+    def get_open_price(self):
+        return self.conn.GetOpenPrice()
 class PositionParsingException(Exception):
     pass
 
