@@ -9,52 +9,54 @@ symbol="AAPL"
 class TestStringMethods(unittest.TestCase):
 
     def test_get_open_price(self):
+        print("\n")
+        aaplSymbol = ConnectorSymbolData("AAPL", account=account, market="")
+        initPrice=aaplSymbol.get_open_price()
+        print("Open",initPrice)
+        self.assertTrue(initPrice>0)
+    
+    def test_get_close_price(self):
+        print("\n")
+        aaplSymbol = ConnectorSymbolData("AAPL", account=account, market="")
+        initPrice=aaplSymbol.get_close_price()
+        print("Close",initPrice)
+        self.assertTrue(initPrice>0)
+
+    def test_get_bid_price(self):
+        print("\n")
+        aaplSymbol = ConnectorSymbolData("AAPL", account=account, market="")
+        initPrice=aaplSymbol.get_bid_price()
+        print("Bid",initPrice)
+        self.assertTrue(initPrice>0)
+    
+    def test_get_ask_price(self):
+        print("\n")
+        aaplSymbol = ConnectorSymbolData("AAPL", account=account, market="")
+        initPrice=aaplSymbol.get_ask_price()
+        print("Ask",initPrice)
+        self.assertTrue(initPrice>0)
+    
+    def test_get_last_price(self):
+        print("\n")
         aaplSymbol = ConnectorSymbolData("AAPL", account=account, market="")
         initPrice=aaplSymbol.get_last_price()
-        print(initPrice)
-        symbol = 'AAPL'
-        price = 5
-        con = ConnectorSterling(verbose=False)
+        print("Last",initPrice)
+        self.assertTrue(initPrice>0)
+    
+    def test_get_cum_vol(self):
+        print("\n")
+        aaplSymbol = ConnectorSymbolData("AAPL", account=account, market="")
+        initVol=aaplSymbol.get_cum_vol()
+        print("CumVol:",initVol)
+        self.assertTrue(initVol>0)
 
-        ordId, status = con.send_limit(account, symbol, 100, price, "ARCA", "B")
-
-        if status == 0:
-            print(f'Cancel order {ordId}')
-            time.sleep(1)
-            con.cancel_order_id(account, ordId)
-            time.sleep(1)
-            status = con.order_status(ordId + 'cancel')
-            print(f'Now order in status {status}')
-        else:
-            print(f"Order status: {status}")
-
-        positions = con.get_all_account_positions(account)
-
-        print('\n'.join([str(x) for x in positions]))
-
-        for p in positions:
-            symb_position = con.get_open_shares(account, p.symbol)
-            print(f'{p.symbol} open shares is {symb_position}')
-        
-        while(1):
-
-            price=aaplSymbol.get_last_price()
-            if price!=initPrice:
-                print(price)
-                break
-        self.assertTrue(price>0)
-    '''
-    def test_isupper(self):
-        self.assertTrue('FOO'.isupper())
-        self.assertFalse('Foo'.isupper())
-
-    def test_split(self):
-        s = 'hello world'
-        self.assertEqual(s.split(), ['hello', 'world'])
-        # check that s.split fails when the separator is not a string
-        with self.assertRaises(TypeError):
-            s.split(2)
-    '''
+    def test_get_avg_vol(self):
+        print("\n")
+        aaplSymbol = ConnectorSymbolData("AAPL", account=account, market="")
+        initVol=aaplSymbol.get_avg_vol()
+        print("AvgVol:",initVol)
+        self.assertTrue(initVol>0)
+    
 
 if __name__ == '__main__':
     
