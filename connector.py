@@ -33,6 +33,18 @@ class ConnectorSymbolData:
     
     def get_open_price(self):
         return self.conn.GetOpenPrice()
+    
+    def get_close_price(self):
+        return self.conn.GetClosePrice()
+    
+    def get_bid_price(self):
+        return self.conn.GetBidPrice()
+
+    def get_cum_vol(self):
+        return self.conn.GetCumVol()
+
+    def get_avg_vol(self):
+        return self.conn.GetAvgVol() 
 class PositionParsingException(Exception):
     pass
 
